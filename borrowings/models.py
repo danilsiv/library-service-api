@@ -7,7 +7,7 @@ from books.models import Book
 
 
 class Borrowing(models.Model):
-    borrow_date = models.DateField(default=now)
+    borrow_date = models.DateField(default=now().date())
     expected_return_date = models.DateField()
     actual_return_date = models.DateField(null=True, blank=True)
     book = models.ForeignKey(
