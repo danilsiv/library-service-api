@@ -6,8 +6,12 @@ from django.db.models import Q, F
 from books.models import Book
 
 
+def current_date():
+    return now().date()
+
+
 class Borrowing(models.Model):
-    borrow_date = models.DateField(default=now().date())
+    borrow_date = models.DateField(default=current_date)
     expected_return_date = models.DateField()
     actual_return_date = models.DateField(null=True, blank=True)
     book = models.ForeignKey(
