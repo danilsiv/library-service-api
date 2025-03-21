@@ -43,3 +43,21 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         book.inventory -= 1
         book.save()
         serializer.save(user=self.request.user)
+
+    @action(methods=["GET"], detail=True, url_path="return")
+    def return_book(self, request, pk=None):
+        borrowing = self.get_object()
+        if borrowing.is_active:
+            borrowing.is_active = False
+            borrowing.actual_return_date = now().date()
+            borrowing.book.inventory += 1
+            borrowing.book.save()
+            borrowing.save()
+            return Response(
+                {"detail": "The book returned successfully."},
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            {"detail": "This book is already returned."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
