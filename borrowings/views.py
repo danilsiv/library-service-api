@@ -10,8 +10,7 @@ from borrowings.serializers import (
     BorrowingListSerializer,
     BorrowingDetailSerializer,
     BorrowingAdminListSerializer,
-    BorrowingAdminDetailSerializer,
-    BorrowingAdminSerializer
+    BorrowingAdminDetailSerializer
 )
 
 
@@ -39,7 +38,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
             return BorrowingAdminListSerializer if self.request.user.is_staff else BorrowingListSerializer
         if self.action == "retrieve":
             return BorrowingAdminDetailSerializer if self.request.user.is_staff else BorrowingDetailSerializer
-        return BorrowingAdminSerializer if self.request.user.is_staff else BorrowingSerializer
+        return BorrowingSerializer
 
     def perform_create(self, serializer):
         book = serializer.validated_data["book"]
