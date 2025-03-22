@@ -38,3 +38,19 @@ class BorrowingListSerializer(serializers.ModelSerializer):
 
 class BorrowingDetailSerializer(BorrowingListSerializer):
     book = BookSerializer()
+
+
+class BorrowingAdminSerializer(BorrowingSerializer):
+    class Meta(BorrowingSerializer.Meta):
+        fields = BorrowingSerializer.Meta.fields + ("user",)
+
+
+class BorrowingAdminListSerializer(BorrowingListSerializer):
+    user = serializers.CharField(read_only=True, source="user.get_full_name")
+
+    class Meta(BorrowingListSerializer.Meta):
+        fields = BorrowingListSerializer.Meta.fields + ("user",)
+
+
+class BorrowingAdminDetailSerializer(BorrowingAdminListSerializer):
+    book = BookSerializer()
