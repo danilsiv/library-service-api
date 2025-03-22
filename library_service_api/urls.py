@@ -23,5 +23,6 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("books.urls", namespace="books")),
+    path("api/", include("borrowings.urls", namespace="borrowings")),
     path("api/user/", include("users.urls", namespace="users")),
 ] + debug_toolbar_urls()
