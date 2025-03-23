@@ -62,6 +62,18 @@ track active borrowings, and receive Telegram notifications on borrowing creatio
     ```bash
    python manage.py loaddata data.json
    
+10. **Create and Configure a Telegram Bot:**
+
+- Open Telegram and search for `@BotFather`.
+- Start a chat with BotFather and send the command `/newbot`.
+- Follow the instructions to choose a name and a username for your bot.
+- After creation, BotFather will provide you with a bot token.
+- Store this token in your `.env` file as BOT_TOKEN.
+- To obtain the chat ID (where notifications will be sent):
+  - Add your bot to a Telegram group or create a chat.
+  - Open a browser and navigate to `https://api.telegram.org/bot<BOT_TOKEN>/getUpdates`
+  - The response will contain a `chat.id` - copy this value and add this to `.anv` as CHAT_ID
+
 ## Containerized Deployment (For Full Environment)
 
 1. **Create and configure the .env file:**
